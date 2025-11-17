@@ -1,0 +1,128 @@
+openapi: 3.0.1
+info:
+  title: Dummy
+  version: 0.0.1
+  description: The model api for all DTOs
+paths: { }
+components:
+  schemas:
+    CountryList:
+      type: object
+      properties:
+        countries:
+          type: array
+          items:
+            $ref: '#/components/schemas/Country'
+          readOnly: true
+    Country:
+      type: object
+      properties:
+        name:
+          type: string
+          readOnly: true
+        area:
+          type: string
+          readOnly: true
+        countryCode:
+          type: string
+          readOnly: true
+    LanguageList:
+      type: object
+      properties:
+        languages:
+          type: array
+          items:
+            $ref: '#/components/schemas/Language'
+          readOnly: true
+    Language:
+      type: object
+      properties:
+        language:
+          type: string
+          readOnly: true
+    CountryInfoList:
+      type: object
+      properties:
+        countries:
+          type: array
+          items:
+            $ref: '#/components/schemas/CountryInfo'
+          readOnly: true
+    CountryInfo:
+      type: object
+      properties:
+        name:
+          type: string
+          readOnly: true
+        countryCode:
+          type: string
+          readOnly: true
+        year:
+          type: integer
+          format: int64
+          readOnly: true
+        population:
+          type: integer
+          format: int64
+          readOnly: true
+        gdp:
+          type: number
+          format: double
+          readOnly: true
+
+    CountryInfoAdvancedList:
+      type: object
+      properties:
+        countries:
+          type: array
+          items:
+            $ref: '#/components/schemas/CountryInfoAdvanced'
+          readOnly: true
+        pageSize:
+          type: integer
+        totalPages:
+          type: integer
+        totalElements:
+          type: integer
+          format: int64
+    CountryInfoAdvanced:
+      type: object
+      properties:
+        continentName:
+          type: string
+          readOnly: true
+        regionName:
+          type: string
+          readOnly: true
+        countryName:
+          type: string
+          readOnly: true
+        year:
+          type: integer
+          format: int64
+          readOnly: true
+        population:
+          type: integer
+          format: int64
+          readOnly: true
+        gdp:
+          type: number
+          format: double
+          readOnly: true
+    RegionList:
+      type: object
+      properties:
+        regions:
+          type: array
+          items:
+            $ref: '#/components/schemas/Region'
+          readOnly: true
+    Region:
+      properties:
+        regionName:
+          type: string
+          readOnly: true
+        regionCode:
+          type: integer
+          format: int64
+          readOnly: true

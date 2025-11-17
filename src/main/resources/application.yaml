@@ -1,0 +1,20 @@
+spring:
+  datasource:
+    driver-class-name: org.mariadb.jdbc.Driver
+    url: jdbc:mariadb://localhost:3306/nation?useSSL=false&allowPublicKeyRetrieval=true&serverTimezone=UTC
+    username: root
+    password: root12345
+    platform: mariadb
+  jpa:
+    show-sql: true
+    database-platform: org.hibernate.dialect.MariaDB103Dialect
+# JWT Configuration
+jwt:
+  secret: my_super_long_and_secure_secret_key_32_chars
+  expiration: 3600000
+mybatis:
+  configuration:
+    map-underscore-to-camel-case: true
+ordering:
+  countryList:
+    countryCode: country_code2

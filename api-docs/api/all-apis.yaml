@@ -1,0 +1,160 @@
+openapi: 3.0.1
+info:
+  title: Dummy
+  version: 0.0.1
+  description: The model api for all DTOs
+paths:
+  /api/auth/login:
+    post:
+      summary: Login
+      tags:
+        - auth
+      operationId: login
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/LoginRequest'
+      responses:
+        '200':
+          description: The access token
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SecurityToken'
+  /countries:
+    get:
+      summary: Get all countries
+      tags:
+        - countries-view
+      operationId: viewCountries
+      parameters:
+        - name: orderBy
+          in: query
+          required: false
+          schema:
+            type: string
+            default: countryCode
+      responses:
+        '200':
+          description: A list of countries
+          content:
+            application/json:
+              schema:
+                $ref: '../model/model-api.yaml#/components/schemas/CountryList'
+  /languages/{countryCode}:
+    get:
+      summary: Get all languages spoken on specific country
+      tags:
+        - countries-view
+      operationId: viewCountryLanguages
+      parameters:
+        - name: countryCode
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: A list of languages
+          content:
+            application/json:
+              schema:
+                $ref: '../model/model-api.yaml#/components/schemas/LanguageList'
+  /countryInfo:
+    get:
+      summary: Get all countries' stats
+      tags:
+        - countries-view
+      operationId: viewCountriesStats
+      parameters:
+        - name: orderBy
+          in: query
+          required: false
+          schema:
+            type: string
+            default: countryCode
+      responses:
+        '200':
+          description: A list of countries' info
+          content:
+            application/json:
+              schema:
+                $ref: '../model/model-api.yaml#/components/schemas/CountryInfoList'
+  /countryInfoAdvanced:
+    get:
+      summary: Get all countries' stats Advanced
+      tags:
+        - countries-view
+      operationId: viewCountriesStatsAdvanced
+      parameters:
+        - name: orderBy
+          in: query
+          required: false
+          schema:
+            type: string
+            default: countryCode
+        - name: yearFrom
+          in: query
+          required: false
+          schema:
+            type: integer
+        - name: yearTo
+          in: query
+          required: false
+          schema:
+            type: integer
+        - name: region
+          in: query
+          required: false
+          schema:
+            type: string
+        - name: page
+          in: query
+          required: false
+          schema:
+            type: integer
+            default: 0
+        - name: size
+          in: query
+          required: false
+          schema:
+            type: integer
+            default: 10
+      responses:
+        '200':
+          description: A list of countries' info advanced
+          content:
+            application/json:
+              schema:
+                $ref: '../model/model-api.yaml#/components/schemas/CountryInfoAdvancedList'
+  /regions:
+    get:
+      summary: Get all regions
+      tags:
+        - countries-view
+      operationId: viewRegions
+      responses:
+        '200':
+          description: A list of regions
+          content:
+            application/json:
+              schema:
+                $ref: '../model/model-api.yaml#/components/schemas/RegionList'
+components:
+  schemas:
+    SecurityToken:
+      properties:
+        access_token:
+          type: string
+          readOnly: true
+    LoginRequest:
+      required:
+        - username
+        - password
+      properties:
+        username:
+          type: string
+        password:
+          type: string
